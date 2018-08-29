@@ -1,5 +1,6 @@
 # pact-simple-consumer
 Simple example with Pact contract testing
+Documentation for Pact [docs.pact.io](https://docs.pact.io/)
 
 # Installation
 ```
@@ -7,7 +8,7 @@ npm i
 ```
 
 # Usage
-Run test script with a commend:
+Run test script with a command:
 ```
 npm run "test:pact:consumer"
 ```

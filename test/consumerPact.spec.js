@@ -3,9 +3,9 @@ const path = require('path')
 const chaiAsPromised = require('chai-as-promised')
 const pact = require('pact')
 const expect = chai.expect
-const API_PORT = 9130
+const API_PORT = 8000
 const {
-  okapiRequest
+  simpleRequest
 } = require('../client')
 chai.use(chaiAsPromised)
 
@@ -13,45 +13,38 @@ const provider = pact({
   consumer: 'Consumer',
   provider: 'Provider',
   port: API_PORT,
-  //log: path.resolve(process.cwd(), 'logs', 'pact.log'),
   dir: path.resolve(process.cwd(), 'pacts'),
-  //logLevel: LOG_LEVEL,
+  logLevel: 'warn',
   spec: 2
 })
 
-describe('Pact with Our Provider', () => {
+describe('Pact testing', () => {
   before(() => {
     return provider.setup()
   })
 
-   describe('Folio consumerPact spec test', () => {
+   describe('consumerPact spec test', () => {
     describe('and a request is called', () => {
       before(() => {
         return provider.addInteraction({
           uponReceiving: 'a request for data',
           withRequest: {
             method: 'POST',
-            path: '/authn/login',
+            path: '/test',
             headers: {
-              'Content-Type': 'application/json',
-              'X-Okapi-Tenant': 'diku',
-              'Accept': 'application/json'
+              'Content-Type': 'application/json'
             },
             body: {
-              "tenant": "diku",
-              "username": "diku_admin",
-              "password": "admin"
+              test: "test"
             }
           },
           willRespondWith: {
-            status: 201,
+            status: 200,
             headers: {
               'Content-Type': 'application/json;'
             },
             body: {
-              "username" : "diku_admin",
-              "password" : "admin",
-              "tenant" : "diku"
+              test: "test"
             }
           }
         })
@@ -59,7 +52,7 @@ describe('Pact with Our Provider', () => {
 
       it('check payload from the provider', async (done) => {
         //Tests for API enpoints can be added here
-        expect(okapiRequest()).to.eventually.have.property('status', 201)
+        expect(simpleRequest()).to.eventually.have.property('status', 200)
         done()
       })
 
@@ -68,7 +61,6 @@ describe('Pact with Our Provider', () => {
   })
 })
 })
-
 
   // This will create contract pact file
   after(() => {

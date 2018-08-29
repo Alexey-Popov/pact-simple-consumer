@@ -1,21 +1,17 @@
 const request = require('superagent')
 const API_HOST = process.env.API_HOST || 'http://localhost'
-const API_PORT = process.env.API_PORT || 9130
+const API_PORT = process.env.API_PORT || 8000
 const API_ENDPOINT = `${API_HOST}:${API_PORT}`
 
-const okapiRequest = function () {
+const simpleRequest = function () {
     const data = {
-        "tenant": "diku",
-        "username": "diku_admin",
-        "password": "admin"
+        test: "test"
     };
 
     return request
-        .post(`${API_ENDPOINT}/authn/login`)
+        .post(`${API_ENDPOINT}/test`)
         .send(data) // sends a JSON post body
         .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('X-Okapi-Tenant', 'diku')
         .then(response => {
             return {
                 status: response.status,
@@ -28,5 +24,5 @@ const okapiRequest = function () {
 }
 
 module.exports = {
-    okapiRequest
+    simpleRequest
 }

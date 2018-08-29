@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oleksii-popov/pact-simple-consumer.git"
+    "url": "git+https://github.com/Alexey-Popov/pact-simple-consumer.git"
   },
   "keywords": [
     "pact",
@@ -17,10 +17,11 @@
   ],
   "author": "Oleksii Popov",
   "license": "ISC",
-  "homepage": "https://github.com/oleksii-popov/pact-simple-consumer#readme",
+  "homepage": "https://github.com/Alexey-Popov/pact-simple-consumer#readme",
   "dependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
     "pact": "^4.3.2",
     "superagent": "^3.8.3"
   }
